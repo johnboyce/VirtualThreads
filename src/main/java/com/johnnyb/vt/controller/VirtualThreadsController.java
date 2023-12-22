@@ -18,9 +18,17 @@ public class VirtualThreadsController {
         this.httpBinService = httpBinService;
     }
 
+
+
     @GetMapping
     public String root() {
-        return "JOHNNY B Virtual Threads";
+        return """
+            <html>
+                <body>
+                    <h2>Virtual Threads</h2>
+                    <span>Turn it on!</span>
+                </body>
+            </html>""";
     }
 
     @GetMapping("delay/{seconds}")
