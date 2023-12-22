@@ -1,0 +1,45 @@
+# TerraformDestroy.yaml
+
+name: 'Destroy Infrastructure'
+
+on: workflow_dispatch
+
+
+env:
+  AWS_REGION: us-east-1 # Change to your region
+  IAM_ROLE_ARN: arn:aws:iam::020157571320:role/github_actions # Change to github action role arn
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+jobs:
+
+  terraform:
+    name: Terraform Destroy
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.IAM_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Terraform Destroy
+        working-directory: ./terraform
+        run: terraform destroy
