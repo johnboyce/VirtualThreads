@@ -58,6 +58,10 @@ jobs:
         working-directory: ./terraform
         run: terraform init
 
+      - name: Show Destroy plan
+        run: terraform plan -destroy
+        continue-on-error: true
+
       - name: Terraform Destroy
         working-directory: ./terraform
-        run: terraform destroy
+        run: terraform destroy -auto-approve
