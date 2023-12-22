@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.johnnyb</groupId>
-	<artifactId>vt</artifactId>
+	<artifactId>virtual-threads</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vt</name>
 	<description>Virtual Threads project for Spring Boot</description>
