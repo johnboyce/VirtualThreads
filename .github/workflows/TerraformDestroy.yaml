@@ -2,7 +2,8 @@
 
 name: 'Destroy Infrastructure'
 
-on: workflow_dispatch
+on:
+  workflow_dispatch
 
 
 env:
@@ -14,7 +15,6 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-
   terraform:
     name: Terraform Destroy
     needs: build
