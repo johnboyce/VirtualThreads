@@ -44,13 +44,25 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
     
-      - name: Docker build, tag, and push image to Amazon ECR
+#      - name: Docker build, tag, and push image to Amazon ECR
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          ECR_REPOSITORY: app-prod-virtualthreads # namespace-stage-name
+#        run: |
+#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_REF_NAME -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+#          docker image push -a $ECR_REGISTRY/$ECR_REPOSITORY
+
+      - name: JIB build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: app-prod-virtualthreads # namespace-stage-name
+          FROM_BASE: eclipse-temurin:21.0.1_12-jdk
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_REF_NAME -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker image push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          mvn compile com.google.cloud.tools:jib-maven-plugin:3.4.0:build \
+           -Djib.from.image=${FROM_BASE} \
+           -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY}:jiblatest \
+           -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY}:latest \
+           -Djib.container.ports.port=3000
 
   terraform:
     name: Terraform Apply
