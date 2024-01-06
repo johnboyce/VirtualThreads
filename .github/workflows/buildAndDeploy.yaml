@@ -60,7 +60,7 @@ jobs:
         run: |
           mvn compile com.google.cloud.tools:jib-maven-plugin:3.4.0:build \
            -Djib.from.image=${FROM_BASE} \
-           -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY}:jiblatest \
+           -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY}:main \
            -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY}:latest \
            -Djib.container.ports.port=3000
 
