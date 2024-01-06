@@ -56,13 +56,12 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: app-prod-virtualthreads # namespace-stage-name
-          TAG: $GITHUB_REF_NAME
           FROM_BASE: eclipse-temurin:21.0.1_12-jdk
         run: |
           mvn compile com.google.cloud.tools:jib-maven-plugin:3.4.0:build \
            -Djib.from.image=${FROM_BASE} \
            -Djib.to.image=${ECR_REGISTRY}/${ECR_REPOSITORY} \
-           -Djib.to.tags=${TAG},latest \
+           -Djib.to.tags=$GITHUB_REF_NAME,latest \
            -Djib.container.ports.port=3000
 
   terraform:
