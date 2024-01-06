@@ -1,3 +1,5 @@
+# This is an example of how the github action should work
+
 FROM_BASE=eclipse-temurin:21.0.1_12-jdk
 ECR_REGISTRY=020157571320.dkr.ecr.us-east-1.amazonaws.com
 ECR_REPOSITORY=app-prod-virtualthreads
