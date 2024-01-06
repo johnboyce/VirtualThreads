@@ -27,7 +27,7 @@ public class VirtualThreadsController {
                 <body>
                     <h2>Virtual Threads</h2>
                     <span>Turn it on!</span>
-                    <h3>Deploy check</h3>
+                    <h3>JIB VERSION DEPLOYED</h3>
                 </body>
             </html>""";
     }
