@@ -1,9 +1,10 @@
 # TerraformDestroy.yaml
 
-name: 'Destroy Infrastructure'
+name: 'Destroy Infrastructure Nightly'
 
 on:
-  workflow_dispatch
+  schedule: ## Schedule the job to run at 12.am daily.
+    - cron: '30 17 * * *'
 
 
 env:
