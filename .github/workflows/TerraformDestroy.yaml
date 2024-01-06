@@ -4,7 +4,7 @@ name: 'Destroy Infrastructure Nightly'
 
 on:
   schedule: ## Schedule the job to run at 12.am daily.
-    - cron: '30 17 * * *'
+    - cron: '30 18 * * *'
 
 
 env:
